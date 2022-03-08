@@ -9,7 +9,7 @@ const {
 
 const userRouter = new Router()
 
-userRouter.post("/:id", userPostMethod)
+userRouter.post("/", userPostMethod)
 userRouter.get("/", userGetMethod)
 userRouter.put("/:id", userPutMethod)
 userRouter.delete("/:id", userDeleteMethod)

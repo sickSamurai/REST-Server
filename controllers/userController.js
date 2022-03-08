@@ -1,41 +1,32 @@
 const { request } = require("express")
 const { response } = require("express")
+const User = require("../models/User")
 
 const userPostMethod = (req = request, res = response) => {
-   const requestBody = req.body
-
+   const user = new User(req.body)
+   user.save()
+   
    res.json({
       msg: "post api",
-      body: requestBody
+      user
    })
 }
 
 const userGetMethod = (req = request, res = response) => {
-   const { q, name, apikey } = req.query
-
    res.json({
-      msg: "get api",
-      q,
-      name,
-      apikey
+      msg: "get api"
    })
 }
 
 const userPutMethod = (req = request, res = response) => {
-   const { id } = req.params
-
    res.json({
-      msg: "put api",
-      id
+      msg: "put api"
    })
 }
 
 const userDeleteMethod = (req, res = response) => {
-   const { id } = req.params
-
    res.json({
-      msg: "delete api",
-      id
+      msg: "delete api"
    })
 }
 
