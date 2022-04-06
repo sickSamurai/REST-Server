@@ -1,9 +1,8 @@
-require('dotenv').config()
 const { request, response } = require('express')
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
 
-const saltRounds = parseInt(process.env.SALT_ROUNDS)
+const saltRounds = 10
 
 const userPostMethod = async (req = request, res = response) => {
    const user = new User(req.body)
