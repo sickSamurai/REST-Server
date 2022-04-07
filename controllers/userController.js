@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 const saltRounds = 10
 
-const userPostMethod = async (req = request, res = response) => {
+const createUser = async (req = request, res = response) => {
    const user = new User(req.body)
    user.password = bcrypt.hashSync(user.password, saltRounds)
    user
@@ -13,9 +13,9 @@ const userPostMethod = async (req = request, res = response) => {
       .catch(err => res.status(400).json({ info: 'Error al crear usuario en BD', err }))
 }
 
-const userGetMethod = async (req = request, res = response) => {
+const getUsers = async (req = request, res = response) => {
    const { limit = 10, skip = 0 } = req.query
-   const statusFilter = { activated: true }
+   const statusFilter = { active: true }
    let users, usersNumber
    Promise.all([
       (users = await User.find(statusFilter).limit(Number(limit)).skip(Number(skip))),
@@ -24,7 +24,7 @@ const userGetMethod = async (req = request, res = response) => {
    res.json({ usersNumber, users })
 }
 
-const userPutMethod = async (req = request, res = response) => {
+const updateUser = async (req = request, res = response) => {
    const { id } = req.params
    const { google, email, ...other } = req.body
    other.password = bcrypt.hashSync(other.password, saltRounds)
@@ -32,15 +32,16 @@ const userPutMethod = async (req = request, res = response) => {
    res.json(`Usuario de id ${user._id} actualizado`)
 }
 
-const userDeleteMethod = async (req, res = response) => {
+const deleteUser = async (req, res = response) => {
    const { id } = req.params
-   await User.findByIdAndUpdate(id, { activated: false })
-   res.json(`Usuario de id ${id} eliminado`)
+   const userLogged = req.userLogged
+   await User.findByIdAndUpdate(id, { active: false })
+   res.json(`Usuario de id ${id} eliminado por usuario de email ${userLogged.email}`)
 }
 
 module.exports = {
-   userPostMethod,
-   userGetMethod,
-   userPutMethod,
-   userDeleteMethod
+   createUser,
+   getUsers,
+   updateUser,
+   deleteUser
 }

@@ -1,14 +1,12 @@
 const { Router } = require('express')
 const { body, param } = require('express-validator')
-const validateFields = require('../middlewares/validate-fields')
-const { isRoleValid, existsEmail, existsUser } = require('../helpers/db-validators')
 
-const {
-   userPostMethod,
-   userGetMethod,
-   userPutMethod,
-   userDeleteMethod
-} = require('../controllers/userController')
+const validateFields = require('../middlewares/validate-fields')
+const validateJWT = require('../middlewares/validate-jwt')
+const { hasAdminRole } = require('../middlewares/validate-roles')
+
+const { isRoleValid, existsEmail, existsUser } = require('../helpers/db-validators')
+const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/userController')
 
 const userRouter = new Router()
 
@@ -25,25 +23,27 @@ userRouter.post(
       body('email', 'El email no es valido').isEmail(),
       validateFields
    ],
-   userPostMethod
+   createUser
 )
 
-userRouter.get('/', userGetMethod)
+userRouter.get('/', getUsers)
 
 userRouter.put(
    '/:id',
    param('id', 'No es un ID Valido').isMongoId(),
    param('id').custom(existsUser),
    validateFields,
-   userPutMethod
+   updateUser
 )
 
 userRouter.delete(
    '/:id',
+   validateJWT,
+   hasAdminRole,
    param('id', 'No es un ID Valido').isMongoId(),
    param('id').custom(existsUser),
    validateFields,
-   userDeleteMethod
+   deleteUser
 )
 
 module.exports = userRouter
