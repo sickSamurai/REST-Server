@@ -15,7 +15,7 @@ const createUser = async (req = request, res = response) => {
 
 const getUsers = async (req = request, res = response) => {
    const { limit = 10, skip = 0 } = req.query
-   const statusFilter = { active: true }
+   const statusFilter = { isActive: true }
    let users, usersNumber
    Promise.all([
       (users = await User.find(statusFilter).limit(Number(limit)).skip(Number(skip))),
@@ -35,7 +35,7 @@ const updateUser = async (req = request, res = response) => {
 const deleteUser = async (req, res = response) => {
    const { id } = req.params
    const userLogged = req.userLogged
-   await User.findByIdAndUpdate(id, { active: false })
+   await User.findByIdAndUpdate(id, { isActive: false })
    res.json(`Usuario de id ${id} eliminado por usuario de email ${userLogged.email}`)
 }
 

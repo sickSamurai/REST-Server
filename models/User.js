@@ -5,7 +5,7 @@ const UserSchema = Schema({
    email: { type: String, required: true, unique: true },
    password: { type: String, required: true },
    role: { type: String, required: true },
-   active: { type: Boolean, default: true },
+   isActive: { type: Boolean, default: true },
    google: { type: Boolean, default: true },
    image: { type: String }
 })

@@ -3,12 +3,27 @@
    <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <title>Laurent API</title>
+      <title>Laurent REST-API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-      <script src="main.js"></script>
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <script src="scripts/google-identity-functions.js"></script>
    </head>
    <body>
-      <h1>Acceso denegado</h1>
+      <div
+         id="g_id_onload"
+         data-client_id="387644902249-j0g7481au4ve97ot5ofhsil5hg9iq964.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false"
+      ></div>
+      <div
+         class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left"
+      ></div>
+      <button onclick="logout()">Salir</button>
    </body>
 </html>

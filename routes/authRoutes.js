@@ -3,7 +3,7 @@ const { body, param } = require('express-validator')
 
 const validateFields = require('../middlewares/validate-fields')
 
-const { login } = require('../controllers/authController')
+const { login, signInWithGoogle } = require('../controllers/authController')
 
 const authRouter = new Router()
 
@@ -13,6 +13,13 @@ authRouter.post(
    body('password', 'el password debe ser obligatorio').notEmpty(),
    validateFields,
    login
+)
+
+authRouter.post(
+   '/google-sign-in',
+   body('id_token', 'el id_token debe ser obligatorio').notEmpty(),
+   validateFields,
+   signInWithGoogle
 )
 
 module.exports = authRouter
