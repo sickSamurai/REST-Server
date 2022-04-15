@@ -9,7 +9,7 @@ const {
    deleteCategory
 } = require('../controllers/categoriesMethods')
 
-const validateJWT = require('../middlewares/validate-JWT')
+const validateJWT = require('../middlewares/validate-token')
 const { hasAdminRole } = require('../middlewares/validate-roles')
 const { existsCategory, notExistsCategoryWithSameName } = require('../helpers/db-validators')
 

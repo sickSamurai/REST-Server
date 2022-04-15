@@ -2,7 +2,7 @@ const { Router } = require('express')
 const { body, param, header } = require('express-validator')
 
 const validateFields = require('../middlewares/validate-fields')
-const validateJWT = require('../middlewares/validate-jwt')
+const validateJWT = require('../middlewares/validate-token')
 const { hasAdminRole } = require('../middlewares/validate-roles')
 
 const { existsRole, notExistsEmail, existsUser } = require('../helpers/db-validators')

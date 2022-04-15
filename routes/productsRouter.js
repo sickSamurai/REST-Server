@@ -11,7 +11,7 @@ const {
 const { existsProduct, existsCategory } = require('../helpers/db-validators')
 
 const validateFields = require('../middlewares/validate-fields')
-const validateJWT = require('../middlewares/validate-jwt')
+const validateJWT = require('../middlewares/validate-token')
 
 const router = new Router()
 

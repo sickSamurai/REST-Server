@@ -3,7 +3,7 @@ const { request, response } = require('express')
 const JWT = require('jsonwebtoken')
 const User = require('../models/User')
 
-const validateJWT = async (req = request, res = response, next) => {
+const validateToken = async (req = request, res = response, next) => {
    try {
       const token = req.header('token')
       const { uid } = JWT.verify(token, process.env.SECRET_KEY)
@@ -19,4 +19,4 @@ const validateJWT = async (req = request, res = response, next) => {
    }
 }
 
-module.exports = validateJWT
+module.exports = validateToken
