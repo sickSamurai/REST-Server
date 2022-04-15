@@ -6,7 +6,7 @@ const validateJWT = require('../middlewares/validate-jwt')
 const { hasAdminRole } = require('../middlewares/validate-roles')
 
 const { existsRole, notExistsEmail, existsUser } = require('../helpers/db-validators')
-const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/userAPI')
+const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/userMethods')
 
 const router = new Router()
 
