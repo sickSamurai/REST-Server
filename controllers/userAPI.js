@@ -34,7 +34,7 @@ const updateUser = async (req = request, res = response) => {
 
 const deleteUser = async (req, res = response) => {
    const { id } = req.params
-   const userLogged = req.userLogged
+   const userLogged = req.userLoggedIn
    await User.findByIdAndUpdate(id, { isActive: false })
    res.json(`Usuario de id ${id} eliminado por usuario de email ${userLogged.email}`)
 }

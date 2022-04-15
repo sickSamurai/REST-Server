@@ -1,34 +1,34 @@
 const { Router } = require('express')
-const { body, param } = require('express-validator')
+const { body, param, header } = require('express-validator')
 
 const validateFields = require('../middlewares/validate-fields')
 const validateJWT = require('../middlewares/validate-jwt')
 const { hasAdminRole } = require('../middlewares/validate-roles')
 
-const { isRoleValid, existsEmail, existsUser } = require('../helpers/db-validators')
-const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/userController')
+const { existsRole, notExistsEmail, existsUser } = require('../helpers/db-validators')
+const { createUser, getUsers, updateUser, deleteUser } = require('../controllers/userAPI')
 
-const userRouter = new Router()
+const router = new Router()
 
-userRouter.post(
+router.post(
    '/',
    [
       body('name', 'El nombre es obligatorio').not().isEmpty(),
       body('email', 'El email es obligatorio').not().isEmpty(),
-      body('email').custom(existsEmail),
+      body('email').custom(notExistsEmail),
       body('password', 'La constraseña es obligatoria').not().isEmpty(),
       body('password', 'La constraseña debe tener más de 6 caracteres').isLength({ min: 6 }),
       body('role', 'El rol es obligatorio').not().isEmpty(),
-      body('role').custom(isRoleValid),
+      body('role').custom(existsRole),
       body('email', 'El email no es valido').isEmail(),
       validateFields
    ],
    createUser
 )
 
-userRouter.get('/', getUsers)
+router.get('/', getUsers)
 
-userRouter.put(
+router.put(
    '/:id',
    param('id', 'No es un ID Valido').isMongoId(),
    param('id').custom(existsUser),
@@ -36,14 +36,15 @@ userRouter.put(
    updateUser
 )
 
-userRouter.delete(
+router.delete(
    '/:id',
-   validateJWT,
-   hasAdminRole,
+   header('token', 'Falta el token en la petición').notEmpty(),
    param('id', 'No es un ID Valido').isMongoId(),
    param('id').custom(existsUser),
    validateFields,
+   validateJWT,
+   hasAdminRole,
    deleteUser
 )
 
-module.exports = userRouter
+module.exports = router

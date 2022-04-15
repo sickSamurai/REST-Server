@@ -1,7 +1,7 @@
 const { request, response } = require('express')
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
-const generateJWT = require('../helpers/jwt-generator')
+const generateJWT = require('../helpers/JWT-generator')
 const getGoogleSignInInfo = require('../helpers/google-sign-in-validator')
 
 const login = async (req = request, res = response) => {

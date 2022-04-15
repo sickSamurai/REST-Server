@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
    <head>
       <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <title>Laurent REST-API</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Laurent REST-API</title>
       <script src="https://accounts.google.com/gsi/client" async defer></script>
       <script src="scripts/google-identity-functions.js"></script>
    </head>
@@ -14,6 +13,7 @@
          data-client_id="387644902249-j0g7481au4ve97ot5ofhsil5hg9iq964.apps.googleusercontent.com"
          data-callback="handleCredentialResponse"
          data-auto_prompt="false"
+         data-auto_select="true"
       ></div>
       <div
          class="g_id_signin"
@@ -24,6 +24,6 @@
          data-shape="rectangular"
          data-logo_alignment="left"
       ></div>
-      <button onclick="logout()">Salir</button>
+      <button onclick="logout()">Cerrar sesión</button>
    </body>
 </html>

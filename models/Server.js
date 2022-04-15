@@ -5,8 +5,11 @@ class Server {
    constructor() {
       this.app = express()
       this.port = process.env.PORT
-      this.userPath = '/api/users'
       this.authPath = '/api/auth'
+      this.categoriesPath = '/api/categories'
+      this.userPath = '/api/users'
+      this.productsPath = '/api/products'
+      this.searchPath = '/api/search'
    }
 
    configMiddlewares() {
@@ -16,8 +19,11 @@ class Server {
    }
 
    configRoutes() {
-      this.app.use(this.authPath, require('../routes/authRoutes'))
-      this.app.use(this.userPath, require('../routes/userRoutes'))
+      this.app.use(this.authPath, require('../routes/authRouter'))
+      this.app.use(this.categoriesPath, require('../routes/categoriesRouter'))
+      this.app.use(this.productsPath, require('../routes/productsRouter'))
+      this.app.use(this.userPath, require('../routes/userRouter'))
+      this.app.use(this.searchPath, require('../routes/searchRouter'))
    }
 
    listen() {
