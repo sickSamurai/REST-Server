@@ -11,7 +11,7 @@ const {
 
 const validateJWT = require('../middlewares/validate-token')
 const { hasAdminRole } = require('../middlewares/validate-roles')
-const { existsCategory, notExistsCategoryWithSameName } = require('../helpers/db-validators')
+const { existsCategory, notExistsCategoryWithSameName } = require('../helpers/db-utilites')
 
 const validateFields = require('../middlewares/validate-fields')
 

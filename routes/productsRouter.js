@@ -8,7 +8,7 @@ const {
    updateProduct,
    deleteProduct
 } = require('../controllers/productsMethods')
-const { existsProduct, existsCategory } = require('../helpers/db-validators')
+const { existsProduct, existsCategory } = require('../helpers/db-utilites')
 
 const validateFields = require('../middlewares/validate-fields')
 const validateJWT = require('../middlewares/validate-token')
